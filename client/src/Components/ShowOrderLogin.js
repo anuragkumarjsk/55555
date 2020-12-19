@@ -1,13 +1,13 @@
-import {useState, useEffect} from 'react'
-import ShowOrders from './ShowOrders'
+import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios'
 
-const TabShoworders = () => {
-    const [show,setshow]=useState(false)
+
+function ShowOrderLogin() {
     const [login,setlogin]=useState('')
     const [pass,setpass]=useState('')
     const [loggedin,setloggedin]=useState(false)
     const [registered,setregistered]=useState(false)
+    const RegisteredUsers=[]
 
     useEffect(() => {
         if(login !== '' && pass !== '')
@@ -31,9 +31,8 @@ const TabShoworders = () => {
         const payload = {username:login,password:pass}
 
         axios.get("http://localhost:4000/user/registered",payload)
-        .then(()=>{
-             console.log('axios to mongodb successfully logged in')
-             setshow(true)
+        .then((d)=>{
+             console.log('axios to mongodb')
         })
         .catch(()=>{
              console.log('unable  to send from axios to mongodb')
@@ -43,10 +42,8 @@ const TabShoworders = () => {
 
     }, [loggedin])
 
-    return(
-    <div>
-    <div>
-    {!show && <div className="row">
+    return (
+        <div className="row">
             <div class=" col-lg-4 center-block">
             <div class="card card-signin my-5">
             <div class="card-body">
@@ -66,12 +63,8 @@ const TabShoworders = () => {
             </div>
             </div>
 
-        </div>}
-    </div>
-
-
-     {show && <ShowOrders/>}
-    </div>
+        </div>
     )
 }
-export default TabShoworders
+
+export default ShowOrderLogin

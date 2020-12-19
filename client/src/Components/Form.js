@@ -30,12 +30,12 @@ export default class Form extends Component {
             DueAmt:null,
             DeliveryDate:new Date(0),
             DeliveryPlace:'',
-            Deposit:{
+            Deposit:[{
                 DDate:new Date(0),
                 Amount:null,
                 UTRNo:'',
                 Bank:''
-            },
+            }],
             Ac:'',
             AcHolder:'',
             AcNo:null,
@@ -79,6 +79,11 @@ export default class Form extends Component {
     handle_input_change=(event)=>{
 
         this.setState({ [event.target.name] : event.target.value  })
+
+    }
+    add_order=(event)=>{
+        event.preventDefault()    
+        alert('add a form col')
 
     }
     submit_form=(event)=>{
@@ -127,31 +132,20 @@ export default class Form extends Component {
                                             <th scope="col">Amount</th>
                                             </tr>
                                         </thead>
-                                        <tbody>
-                                        <tr>
+                                        <tbody id="ordr_body">
+                                        <tr id="ordr_row">
                                             <th scope="col"><input type="text" className="form-control"  placeholder="Details 1" id="det1"  /></th>
                                             <th scope="col"><input type="number" className="form-control" placeholder="Quantity 1" id="qt1"/></th>
                                             <th scope="col"><input type="number" className="form-control" placeholder="Rate 1" id="rt1"/></th>
                                             <th scope="col"><input type="number" className="form-control" placeholder="Amount 1" id="at1"/></th>
-                                        
                                         </tr>
-                                        <tr>
-                                            <th scope="col"><input type="text" className="form-control" id="det2" placeholder="Details 2"/></th>
-                                            <th scope="col"><input type="number" className="form-control" placeholder="Quantity 2" id="qt2"/></th>
-                                            <th scope="col"><input type="number" className="form-control" placeholder="Rate 2" id="rt2"/></th>
-                                            <th scope="col"><input type="number" className="form-control" placeholder="Amount 2" id="at2"/></th>
-                                        
-                                        </tr>
-                                        <tr>
-                                            <th scope="col"><input type="text" className="form-control" id="det3" placeholder="Details 3"/></th>
-                                            <th scope="col"><input type="number" className="form-control" placeholder="Quantity 3" id="qt3"/></th>
-                                            <th scope="col"><input type="number" className="form-control" placeholder="Rate 3" id="rt3"/></th>
-                                            <th scope="col"><input type="number" className="form-control" placeholder="Amount 3" id="at3"/></th>
-                                        
-                                        </tr>
+
                                         </tbody>
                                     </table>
-                                    <button className="btn btn-info">Add +</button>
+                                    <button className="btn btn-info" onClick={this.add_order}>Add +</button>
+
+
+
                                     <div className="row">
                                         <div className="col">
                                         <input type="number"  step="0.01" className="form-control" id="transport" placeholder="Transport Charges" value={this.state.TransportChrg}/>

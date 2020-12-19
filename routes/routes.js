@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const User = require('../models/form')
 
+//add orders
 router.post('/order/add',async function(req,res){
     let user = new User();
     user.OrderNo=req.body.OrderNo;
@@ -50,6 +51,8 @@ router.post('/order/add',async function(req,res){
     })
 });
 
+//get orders
+
 router.get('/order/show',async function(req,res){
    try{ 
         await User.find({},function(err,order){
@@ -62,21 +65,9 @@ router.get('/order/show',async function(req,res){
     
 });
 
-router.get('/order/show/id/:id',async function(req,res){
-    let id = req.params.id;
-    await User.findById(id,(err,results)=>{
-        if(err)
-        {
-            console.log(err)
-        }
-        else{
-            res.json(results)  
-        }
-    })
-})
-router.get('/order/show/contact/:mob_no',async function(req,res){
+router.get('/order/show/1/:mob_no',async function(req,res){
     let mob_no = req.params.mob_no;
-    await User.find({Contact:mob_no},(err,record)=>{
+    await User.findOne({Contact:mob_no},(err,record)=>{
         if(err)
         {
            console.log(err)
@@ -87,6 +78,34 @@ router.get('/order/show/contact/:mob_no',async function(req,res){
     })
         
 })
+
+router.get('/order/show/2/:id',async function(req,res){
+    let id = req.params.id;
+    await User.findOne({OrderNo:id},(err,results)=>{
+        if(err)
+        {
+            console.log(err)
+        }
+        else{
+            res.json(results)  
+        }
+    })
+})
+
+router.get('/order/show/3/:adhr',async function(req,res){
+    let adhr = req.params.adhr;
+    await User.findOne({AadharNo:adhr},(err,results)=>{
+        if(err)
+        {
+            console.log(err)
+        }
+        else{
+            res.json(results)  
+        }
+    })
+})
+
+//delete orders
 
 router.delete('/order/delete/mob/:cus_mobile',async function(req,res){
     var mob_no = req.params.cus_mobile;
@@ -121,7 +140,9 @@ router.delete('/order/delete/adhr/:adhaar_num',async function(req,res){
     })
 })
 
-router.put('/order/update/:cus_mobile',async (req,res)=>{
+//update orders
+
+router.put('/order/update/1/:cus_mobile',async (req,res)=>{
     var mob_no = req.params.cus_mobile;
     var newdata = req.body
    await User.updateOne({Contact:mob_no},newdata,(err,data)=>{
@@ -135,5 +156,36 @@ router.put('/order/update/:cus_mobile',async (req,res)=>{
        } 
     })
 })
+
+router.put('/order/update/2/:order_num',async (req,res)=>{
+    var ordr_no = req.params.order_num;
+    var newdata = req.body
+   await User.updateOne({OrderNo:ordr_no},newdata,(err,data)=>{
+       if(err)
+       {
+           console.log(err)
+       }
+       else
+       {
+           res.status(200).send(data)
+       } 
+    })
+})
+
+router.put('/order/update/3/:adhaar_num',async (req,res)=>{
+    var adhr_no = req.params.adhaar_num;
+    var newdata = req.body
+   await User.updateOne({AadharNo:adhr_no},newdata,(err,data)=>{
+       if(err)
+       {
+           console.log(err)
+       }
+       else
+       {
+           res.status(200).send(data)
+       } 
+    })
+})
+
 
 module.exports=router;

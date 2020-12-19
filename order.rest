@@ -2,25 +2,25 @@ POST http://localhost:4000/order/add
 content-type: application/json
 
 {
-    "OrderNo":"1500001",
-    "Date":"2020-07-18",
-    "Name":"Sameer",
-    "Address":"venus",
-    "AadharNo":"1500000",
-    "Tehsil":"japan",
-    "District":"mezru",
-    "PinCode":"999222",
-    "State":"jester",
-    "Whatsapp":"7674384302",
-    "Contact":"7777777000",
-    "CompanyName":"oltu",
+    "OrderNo":"16666666",
+    "Date":"2010-11-18",
+    "Name":"puravi",
+    "Address":"earth",
+    "AadharNo":"158999",
+    "Tehsil":"monster",
+    "District":"mazgaon",
+    "PinCode":"888111",
+    "State":"jupiter",
+    "Whatsapp":"7000888999",
+    "Contact":"7777111999",
+    "CompanyName":"oltu metrics",
     "Order":[{
-        "Details":"something new",
+        "Details":"something old",
         "Qty":"5443534",
         "Rate":"3434",
-        "Amount":"4343434"
+        "Amount":"4343000"
     }],
-    "TotalAmt":"3243234",
+    "TotalAmt":"1233234",
     "Advance":"04328",
     "DeliveryDate":"2018-04-03",
     "DeliveryPlace":"Rancfi",
@@ -34,7 +34,7 @@ content-type: application/json
     "AcNo":"3443424",
     "IFSC":"jifsc",
     "DealerName":"lasfljlda",
-    "DealerContact":"9999999999"
+    "DealerContact":"9999009999"
 }
 ###
 GET http://localhost:4000/
@@ -80,6 +80,47 @@ content-type: application/json
         "Bank":"erewew"
     },
     "AcHolder":"some holder",
+    "AcNo":"3443424",
+    "IFSC":"jifsc",
+    "DealerName":"lasfljlda",
+    "DealerContact":"9999999999"
+}
+###
+
+
+PUT  http://localhost:4000/order/update/2/1500071
+content-type: application/json
+
+{
+    "OrderNo":"0000001",
+    "Date":"2020-07-18",
+    "Name":"Amitesh",
+    "Address":"work stream",
+    "AadharNo":"1700123",
+    "Tehsil":"russia",
+    "District":"mezru",
+    "PinCode":"999222",
+    "State":"kiev",
+    "Whatsapp":"7000380002",
+    "Contact":"7773337000",
+    "CompanyName":"techstack",
+    "Order":[{
+        "Details":"something new",
+        "Qty":"5443534",
+        "Rate":"3434",
+        "Amount":"4343434"
+    }],
+    "TotalAmt":"3243234",
+    "Advance":"04328",
+    "DeliveryDate":"2018-04-03",
+    "DeliveryPlace":"Rancfi",
+    "Deposit":{
+        "DDate":"2017-09-16",
+        "Amount":"09400000",
+        "UIRNo":"rere234",
+        "Bank":"erewew"
+    },
+    "AcHolder":"rich person",
     "AcNo":"3443424",
     "IFSC":"jifsc",
     "DealerName":"lasfljlda",

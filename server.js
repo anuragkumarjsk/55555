@@ -8,14 +8,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 const  mongoose  = require('mongoose');
-// const MongoClient = require('mongodb').MongoClient;
 const uri = 
-// const client = new MongoClient(uri, { useNewUrlParser: true,useUnifiedTopology: true });
-// client.connect(err => {
-//   const collection = client.db("test").collection("devices");
-//   // perform actions on the collection object
-//   client.close();
-// });
 
 mongoose.connect(uri, {
   useNewUrlParser: true,
@@ -26,7 +19,9 @@ mongoose.connect(uri, {
 })
 .catch(err => console.log(err))
 
-const users = require('./routes/routes');
+const order_routes = require('./routes/routes');
+const user_routes = require('./routes/user_routes');
+
 app.set("views", path.join(__dirname,"views"));
 app.use(cors());
 
@@ -35,7 +30,9 @@ app.use(express.json());
 app.use(express.urlencoded({extended:false}));
 
 
-app.use('/',users);
+app.use('/',order_routes);
+app.use('/',user_routes)
+
 app.get('/',function(req,res){
     res.send('Test successful');
 });
