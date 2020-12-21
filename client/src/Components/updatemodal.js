@@ -11,21 +11,21 @@ export default class updatemodal extends React.Component{
     return (
         <>
         
-       <div>
+    <div>
            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#update_form">
            Resubmit form
              </button>
 
- <div class="modal" id="update_form">
-  <div class="modal-dialog">
-    <div class="modal-content">
+            <div class="modal" id="update_form">
+            <div class="modal-dialog">
+                <div class="modal-content">
 
-       <div class="modal-header">
-         <h4 class="modal-title">Modal Heading</h4>
-         <button type="button" class="close" data-dismiss="modal">&times;</button>
-       </div>
+                <div class="modal-header">
+                    <h4 class="modal-title">Modal Heading</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
 
-       <div class="modal-body">
+                <div class="modal-body">
         <>
         <span>
             {this.props.val}
@@ -48,11 +48,11 @@ export default class updatemodal extends React.Component{
         </>
        </div>
        <div class="modal-footer">
-         <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-       </div>
-     </div>
-   </div>
- </div>    
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                </div>
+                </div>
+            </div>
+            </div>    
          </div>
     </>
     )

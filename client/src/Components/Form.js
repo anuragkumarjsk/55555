@@ -42,7 +42,7 @@ export default class Form extends Component {
             IFSC:'',
             DealerName:'',
             DealerContact:null,   
-        
+
                 show_personal:true,
                 show_order:false,
                 show_bank:false
@@ -105,7 +105,7 @@ export default class Form extends Component {
                                {this.state.show_personal && <form id="personalDetails" className="card-body border rounded-sm border-warning bg-light">
                                     <div className="form-group">
                                         <label htmlFor="dat">Enter Date:</label>
-                                        <input type="date" className="form" id="dat" name="dt" name="Date" onChange={this.handle_input_change} />
+                                        <input type="date" className="form-control" id="dat" name="dt" name="Date" onChange={this.handle_input_change} />
                                         <input type="text" className="form-control" placeholder="Name" id="uname" name="Name"  value={this.state.Name} onChange={this.handle_input_change}/>
                                         <input type="text" className="form-control" placeholder="AadharNo" id="adhno" name="AadharNo"  value={this.state.AadharNo} onChange={this.handle_input_change}/>
                                         <input type="text" className="form-control" placeholder="Address" id="addr" name="Address" value={this.state.Address}  onChange={this.handle_input_change}/>

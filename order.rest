@@ -2,15 +2,15 @@ POST http://localhost:4000/order/add
 content-type: application/json
 
 {
-    "OrderNo":"16666666",
-    "Date":"2010-11-18",
-    "Name":"puravi",
-    "Address":"earth",
-    "AadharNo":"158999",
-    "Tehsil":"monster",
-    "District":"mazgaon",
-    "PinCode":"888111",
-    "State":"jupiter",
+    "OrderNo":"800991111",
+    "Date":"2017-11-18",
+    "Name":"SAra",
+    "Address":"Saturn",
+    "AadharNo":"166550",
+    "Tehsil":"mariott",
+    "District":"rastampt",
+    "PinCode":"70005111",
+    "State":"rant",
     "Whatsapp":"7000888999",
     "Contact":"7777111999",
     "CompanyName":"oltu metrics",
@@ -30,6 +30,7 @@ content-type: application/json
         "UIRNo":"rere234",
         "Bank":"erewew"
     },
+    "Ac":"HDFC",
     "AcHolder":"rich person",
     "AcNo":"3443424",
     "IFSC":"jifsc",
