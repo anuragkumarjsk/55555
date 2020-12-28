@@ -14,26 +14,25 @@ router.post('/order/add',async function(req,res){
     user.District=req.body.District;
     user.PinCode=req.body.PinCode;
     user.State=req.body.State;
-    user.Whatsapp=req.body.Whatsapp;
+    user.Watsapp=req.body.Watsapp;
     user.Contact=req.body.Contact;
     user.CompanyName=req.body.CompanyName;
-    user.Order.Details=req.body.Order.Details;
-    user.Order.Qty=req.body.Order.Qty;
-    user.Order.Rate=req.body.Order.Rate;
-    user.Order.Amount=req.body.Order.Amount;
+
+
+    user.OrderTable=req.body.OrderTable;
 
     user.BillAmt=req.body.BillAmt;
-    user.TrasportChrg=req.body.TrasportChrg;
+    user.TransportChrg=req.body.TransportChrg;
     user.TotalAmt=req.body.TotalAmt;
     user.Advance=req.body.Advance;
     user.DueAmt=req.body.DueAmt;
 
     user.DeliveryDate=req.body.DeliveryDate;
     user.DeliveryPlace=req.body.DeliveryPlace;
-    user.Deposit.DDate=req.body.Deposit.DDate;
-    user.Deposit.Amount=req.body.Deposit.Amount;
-    user.Deposit.UTRNo=req.body.Deposit.UTRNo;
-    user.Deposit.Bank=req.body.Deposit.Bank;
+
+    user.DepositTable=req.body.DepositTable;
+    
+    user.Ac=req.body.Ac;
     user.AcHolder=req.body.AcHolder;
     user.AcNo=req.body.AcNo;
     user.IFSC=req.body.IFSC;

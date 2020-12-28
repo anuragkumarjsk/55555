@@ -37,7 +37,7 @@ let FormSchema = mongoose.Schema({
         type:String,
         required:false
     },
-    Whatsapp:{
+    Watsapp:{
         type:Number,
         required:false,
         min : 1000000000,
@@ -54,12 +54,12 @@ let FormSchema = mongoose.Schema({
         type:String,
         required:false
     },
-    Order:[{
-        Details:{type:String, required:false, default: 'reva g9'},
-        Qty:{type:Number, required:false, default:0 },
-        Rate:{type:Number, required:false, default:0.0},
-        Amount:{type:Number,required:false, default:0.0}
-    }],
+    OrderTable:[],
+    Order_Details:{type:String, required:false, default: ''},
+    Order_Quantity:{type:Number, required:false, default:0 },
+    Order_Rate:{type:Number, required:false, default:0.0},
+    Order_Amount:{type:Number, required:false, default:0.0},
+    
     TotalAmt:{
         type:Number,
         required:false
@@ -68,7 +68,7 @@ let FormSchema = mongoose.Schema({
         type:Number,
         required:false
     },
-    TrasportChrg:{
+    TransportChrg:{
         type:Number,
         required:false
     },
@@ -88,13 +88,11 @@ let FormSchema = mongoose.Schema({
         type:String,
         required:false
     },
-    Deposit:{
-        DDate:{type:Date,required:false},
-        Amount:{type:Number,required:false},
-        UTRNo:{type:String,required:false},
-        Bank:{type:String,required:false}
-
-    },
+    DepositTable:[],
+    Deposit_Date:{type:Date,required:false},
+    Deposit_Amount:{type:Number,required:false},
+    Deposit_UTRNo:{type:String,required:false},
+    Deposit_Bank:{type:String,required:false},
     Ac:{
         type:String,
         required:false
@@ -121,7 +119,6 @@ let FormSchema = mongoose.Schema({
         required:false,
         min : 1000000000,
         max : 9999999999
-        
     },
     
 

@@ -6,8 +6,7 @@ import Form_details from './Form'
     render() {
         return (
             <div>
-                <Form_details/>
-               
+                <Form_details/>      
             </div>
         )
     }

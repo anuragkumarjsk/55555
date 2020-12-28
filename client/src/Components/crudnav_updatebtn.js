@@ -17,13 +17,12 @@ export default function Crudnav_Updatebtn(props) {
         Contact:null,
         CompanyName:'',
 
+        OrderTable:[],
+        Order_Details:'',
+        Order_Quantity:null,
+        Order_Rate:null,
+        Order_Amount:null,
 
-        Order:[{
-            Details:'',
-            Qty:null,
-            Rate:null,
-            Amount:null
-        }],
         TotalAmt:null,
         Advance:null, 
         BillAmt:null,
@@ -31,12 +30,12 @@ export default function Crudnav_Updatebtn(props) {
         DueAmt:null,
         DeliveryDate:new Date(0),
         DeliveryPlace:'',
-        Deposit:[{
-            DDate:new Date(0),
-            Amount:null,
-            UTRNo:'',
-            Bank:''
-        }],
+
+        DepositTable:[],
+        Deposit_Date:new Date(0),
+        Deposit_Amount:null,
+        Deposit_UTRNo:'',
+        Deposit_Bank:'',
 
 
         Ac:'',
@@ -47,7 +46,71 @@ export default function Crudnav_Updatebtn(props) {
         DealerContact:null,
     })
 
+    function Set_BillAmt(){
+        var result=0
+        result = upform.OrderTable.map((i)=>{return result + i.Order_Amount})
+        var sum = result.reduce(function(a, b){
+            return a + b;
+        }, 0);
+        upformset( prevState => ({
+            ...prevState,
+            BillAmt:sum
+        }))
+    }
+    function add_order(event){
+        event.preventDefault()    
+        var payload = {
+                       Order_Details:upform.Order_Details,
+                       Order_Quantity:upform.Order_Quantity,
+                       Order_Rate:upform.Order_Rate,
+                       Order_Amount:upform.Order_Quantity * upform.Order_Rate
+                    }
+        upform.OrderTable.push(payload)
+        Set_BillAmt()
 
+        upformset( prevState => ({
+            ...prevState,
+           Order_Details:'',Order_Quantity:'',Order_Rate:'',Order_Amount:''
+        }))
+    }
+
+    function delete_order(e,indx){
+        e.preventDefault()
+        var data = [...upform.OrderTable];
+        data.splice(indx, 1);
+        upformset( prevState => ({
+            ...prevState,
+           OrderTable:data
+        }))
+        upformset( prevState => ({
+            ...prevState,
+           BillAmt:upform.BillAmt - upform.OrderTable[indx].Order_Amount 
+        }))
+    }
+
+    function add_deposit(e){
+        e.preventDefault()
+        var payload = {
+            Deposit_Date:upform.Deposit_Date,
+            Deposit_Amount:upform.Deposit_Amount,
+            Deposit_UTRNo:upform.Deposit_UTRNo,
+            Deposit_Bank:upform.Deposit_Bank
+        }
+        var dat = [...upform.DepositTable,payload]
+        upformset( prevState => ({
+            ...prevState,
+            DepositTable:dat
+        }));
+    }
+    function delete_deposit(e,indx){
+        e.preventDefault()
+        var data = [...upform.DepositTable];
+        data.splice(indx, 1);
+        upformset( prevState => ({
+            ...prevState,
+            DepositTable:data
+        }));
+    }
 
     function  handle_input_change(event){
         const {name , value} = event.target
@@ -92,7 +155,7 @@ export default function Crudnav_Updatebtn(props) {
         <button class="btn btn-outline-success my-2 mr-sm-0" type="submit" onClick={show_record} data-toggle="modal" data-target="#update_form"><b>Update</b></button>
        
         <div class="modal" id="update_form">
-            <div class="modal-dialog">
+            <div class=" modal-dialog modal-lg ">
                 <div class="modal-content">
                 <div class="modal-header">
                     <h4 class="modal-title">Modal Heading</h4>
@@ -122,6 +185,118 @@ export default function Crudnav_Updatebtn(props) {
                     <input type="tel" className="form-control"  id="contNum" pattern="[0-9]{10}" placeholder="Contact Number" name="Contact" value={upform.Contact}  onChange={handle_input_change}/>
                     <label htmlFor="compNam">Company Name:</label>
                     <input type="text" className="form-control" placeholder="Enter Company Name" id="compNam" name="CompanyName" value={upform.CompanyName}  onChange={handle_input_change}/>      
+
+                    <table className="table table-bordered">
+                                        <thead>
+                                        <tr>
+                                            <th scope="col">Srl No</th>
+                                            <th scope="col ">Details</th>
+                                            <th scope="col">Quantity</th>
+                                            <th scope="col">Rate</th>
+                                            <th scope="col">Amount</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="ordr_body">
+                                        <tr id="ordr_row">
+                                            <th scope="col"><tr><button className="btn btn-info" onClick={add_order} ><em>+</em>new </button></tr></th>
+                                            <th scope="col"><input type="text" className="form-control" name="Order_Details" placeholder={`Details `}  value={upform.Order_Details } onChange={handle_input_change}   id="det1"  /></th>
+                                            <th scope="col"><input type="number" className="form-control" name="Order_Quantity" placeholder={`Quantity`} value={upform.Order_Quantity } onChange={handle_input_change}  id="qt1"/></th>
+                                            <th scope="col"><input type="number" className="form-control" name="Order_Rate" placeholder={`Rate `}   value={upform.Order_Rate } onChange={handle_input_change}  id="rt1"/></th>
+                                            <th scope="col"><input type="number" className="form-control" name="Order_Amount" placeholder={`Amount `} value={upform.Order_Quantity * upform.Order_Rate } onChange={handle_input_change}  id="at1"/></th>
+                                        </tr>
+                                        
+                                        { upform.OrderTable.map((onearr,idnexval)=>{
+                                            return(<tr key={idnexval}>
+                                            <td><button className="btn-sm btn-danger"onClick={(e)=>delete_order(e,idnexval)}>delete {idnexval+1}</button></td>
+                                            <td>{onearr.Order_Details}</td>
+                                            <td>{onearr.Order_Quantity}</td>
+                                            <td>{onearr.Order_Rate}</td>
+                                            <td>{onearr.Order_Amount}</td>
+                                            </tr>)
+                                        })
+                                        }
+                                        </tbody>
+                                        </table>
+
+
+
+<div className="row" >
+<div className="col"></div>
+<div className="col"></div>
+<div className="col"><h5>Bill Amount:</h5></div>
+                                        <div className="col">
+                                        <input type="number"  className="form-control" placeholder="Bill Amount" id="bill" value={upform.BillAmt} onChange={handle_input_change}/>
+                                        </div>
+                                    
+</div>
+<div className="row" >
+<div className="col"></div>
+<div className="col"><h6>Transport Charge:</h6></div>
+                                        <div className="col">
+                                        <input type="number"  className="form-control" id="transport" placeholder="Transport Charge" name="TransportChrg" value={upform.TransportChrg} onChange={handle_input_change}/>
+                                        </div>
+                                    
+<div className="col"></div>
+<div className="col"><h6>Total Amount:</h6></div>
+                                        <div className="col">
+                                        <input type="number" className="form-control" placeholder="Total Amount" id="total" name="TotalAmt" value={ parseFloat(upform.BillAmt) + parseFloat(upform.TransportChrg)} onChange={handle_input_change}/>
+                                        </div>                           
+</div>
+
+<div className="row" >
+<div className="col"></div>
+<div className="col"><h6>Advance :</h6></div>
+                                        <div className="col">
+                                        <input type="number"  className="form-control" placeholder="Advance Payment" id="advPay" name="Advance" value={upform.Advance} onChange={handle_input_change} />
+                                        </div>          
+<div className="col"></div>
+<div className="col"><h6>Due Amount:</h6></div>
+                                        <div className="col">
+                                        <input type="number"  className="form-control" placeholder="Due Amount" id="dueAmt" name="DueAmt" value={ parseFloat(upform.BillAmt) + parseFloat(upform.TransportChrg)  - parseFloat(upform.Advance) } onChange={handle_input_change}/>
+                                        </div>                                                            
+</div>
+
+
+
+                                    <div className="card">
+                                    <label for="delDt" style={{marginLeft:0,borderLeft:0}}>Delivery Date:<input type="date" className="form" id="delDt" name="DeliveryDate" value={upform.DeliveryDate} onChange={handle_input_change}/></label> 
+                                    <input type="text" className="form-control" placeholder="Delivery Address" id="deladdr" name="DeliveryPlace" value={upform.DeliveryPlace} onChange={handle_input_change}  />
+                                    </div>
+        
+                                    <table className="table  table-bordered">
+                                        <thead>
+                                        <tr>
+                                            <th scope="col"></th>
+                                            <th scope="col">Deposite Date</th>
+                                            <th scope="col">Amount</th>
+                                            <th scope="col">UTR, IMPS, REF.NO</th>
+                                            <th scope="col">Bank Name</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr>
+                                            <th scope="col"><button className="btn btn-info" onClick={add_deposit} >+</button></th>
+                                            <th scope="col"><input type="date" className="form-control" name="Deposit_Date" value={upform.Deposit_Date} onChange={handle_input_change}  id="depdt1"/></th>
+                                            <th scope="col"><input type="number" className="form-control" name="Deposit_Amount" value={upform.Deposit_Amount} onChange={handle_input_change}   id="famt1"/></th>
+                                            <th scope="col"><input type="text" className="form-control" name="Deposit_UTRNo" value={upform.Deposit_UTRNo} onChange={handle_input_change}   id="ref1"/></th>
+                                            <th scope="col"><input type="text" className="form-control" name="Deposit_Bank" value={upform.Deposit_Bank} onChange={handle_input_change}   id="bank1"/></th>
+                                        </tr>
+                                        { upform.DepositTable.map((onearr,idnexval)=>{
+                                            return(<tr key={idnexval}>
+                                            <td><button className="btn-sm btn-danger"onClick={(e)=>delete_deposit(e,idnexval)}>delete {idnexval+1}</button></td>
+                                            <td>{onearr.Deposit_Date}</td>
+                                            <td>{onearr.Deposit_Amount}</td>
+                                            <td>{onearr.Deposit_UTRNo}</td>
+                                            <td>{onearr.Deposit_Bank}</td>
+                                            </tr>)
+                                        })
+                                        }
+
+                                        </tbody>
+                                    </table>
+ 
+
+
 
                 
                     <label for="acc_nam">Account Name:</label>

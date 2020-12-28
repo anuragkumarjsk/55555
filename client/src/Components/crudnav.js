@@ -30,7 +30,7 @@ class crudnav extends Component {
             <div>
                 <div className="row navbar navbar-light bg-light">
                   <div className="col"> <input class="form-control mr-sm-2" type="number" placeholder="Contact No"  name="ContactNo" value={this.state.contact} onChange={this.contact_change} /></div>
-                  <div className="col"><input class="form-control mr-sm-2" type="number" placeholder="Order No" name="OrderNo" value={this.state.order}  onChange={this.order_change}/></div>
+                  <div className="col"><input class="form-control mr-sm-2" type="text" placeholder="Order No" name="OrderNo" value={this.state.order}  onChange={this.order_change}/></div>
                   <div className="col"><input class="form-control mr-sm-2" type="number" placeholder="Adhaar No" name="AadharNo" value={this.state.adhaar}  onChange={this.adhaar_change} /></div>
                   <div className="col">
                     <Updt_Btn contact={this.state.contact} order={this.state.order} adhaar={this.state.adhaar} Active={this.state.Active}/> 
@@ -42,3 +42,5 @@ class crudnav extends Component {
     }
 }
 export default crudnav
+
+
