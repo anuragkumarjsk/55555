@@ -23,7 +23,7 @@ const TabShoworders = () => {
              })
     
         }//end of if
-    }, [registered])
+    }, [registered,login,pass])
 
     useEffect(() => {
        if(login !== '' && pass !== '')
@@ -41,7 +41,7 @@ const TabShoworders = () => {
 
        }//if block
 
-    }, [loggedin])
+    }, [loggedin,login,pass])
 
     return(
     <div>

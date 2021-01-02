@@ -1,12 +1,12 @@
 import React, { Component } from 'react'
 
-import Form_details from './Form'
+import FormDetails from './Form'
 
  class TabForm extends Component {
     render() {
         return (
             <div>
-                <Form_details/>      
+                <FormDetails/>      
             </div>
         )
     }
